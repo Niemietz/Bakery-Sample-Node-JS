@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= data.company.name %> — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<%- include('partials/header') %>
+
+<main>
+  <section class="hero" style="background-image: url('<%= data.hero.image %>')">
+    <div class="hero-overlay">
+      <h1 class="hero-headline"><%= data.hero.title %></h1>
+      <p class="hero-cta"><a class="primary-btn" href="#order"><%= data.hero.ctaText %></a></p>
+    </div>
+  </section>
+
+  <section class="why container fade-in">
+    <h2><%= data.sections.whyChooseUs.title %></h2>
+    <p class="lead"><%= data.sections.whyChooseUs.description %></p>
+
+    <div class="cards">
+      <% data.sections.whyChooseUs.features.forEach(function(cat) { %>
+        <article class="card">
+          <div class="card-image" style="background-image: url('<%= cat.image %>')"></div>
+          <h3><%= cat.name %></h3>
+          <p><%= cat.description %></p>
+          <p><a class="secondary-btn" href="#gallery"><%= cat.cta %></a></p>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery container fade-in">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <% data.sections.gallery.forEach(function(img) { %>
+        <div class="g-item" style="background-image: url('<%= img %>')"></div>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="visit container fade-in">
+    <div class="visit-text">
+      <h2><%= data.footer.visitUs %></h2>
+      <p><%= data.footer.visitUsDescription %></p>
+      <a class="primary-btn" href="/contact"><%= data.footer.visitUsCta_text %></a>
+    </div>
+    <div class="visit-info">
+      <h4>Visit</h4>
+      <p><strong>Address:</strong> <%= data.footer.address %></p>
+      <p><strong>Phone:</strong> <%= data.footer.phone %></p>
+    </div>
+  </section>
+
+  <section class="bottom container fade-in">
+    <div class="bottom-items">
+      <% data.footer.bottom.forEach(function(item) { %>
+        <div class="bottom-item">
+          <h4><%= item.title %></h4>
+          <p><%= item.description %></p>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

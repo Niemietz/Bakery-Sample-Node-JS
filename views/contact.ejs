@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= data.company.name %> — Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<%- include('partials/header') %>
+
+<main class="container fade-in contact-page">
+  <h2>Contact Us</h2>
+  <p><strong>Phone:</strong> <%= data.footer.phone %></p>
+  <p><strong>Address:</strong> <%= data.footer.address %></p>
+
+  <% if (submitted) { %>
+    <div class="success">✅ Thanks! Your message has been received.</div>
+  <% } else { %>
+    <form action="/contact" method="POST" class="contact-form">
+      <label>Name</label>
+      <input name="name" type="text" required>
+      <label>Email</label>
+      <input name="email" type="email" required>
+      <label>Message</label>
+      <textarea name="message" required></textarea>
+      <button class="primary-btn" type="submit">Send Message</button>
+    </form>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

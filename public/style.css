@@ -1,0 +1,160 @@
+:root{
+	--primary:#FFA07A; /* warm salmon */
+	--secondary:#FFF3E6; /* cream */
+	--accent:#6B3E2A; /* deep brown */
+	--muted:#BFA08A;
+	--container:1100px;
+}
+
+*{box-sizing:border-box}
+body{
+	margin:0;
+	font-family: "Open Sans", Arial, sans-serif;
+	background: linear-gradient(180deg,var(--secondary), #fff);
+	color:var(--accent);
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	line-height:1.5;
+}
+
+/* header */
+.site-header{
+	background: #fff;
+	border-bottom:1px solid rgba(0,0,0,0.04);
+	position:sticky;
+	top:0;
+	z-index:10;
+}
+.site-header .inner{
+	max-width:var(--container);
+	margin:0 auto;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:1rem 1.25rem;
+}
+.brand-top{
+	font-family:"Playfair Display", serif;
+	font-size:1.6rem;
+	color:var(--accent);
+	letter-spacing:2px;
+	width:100px;
+}
+.site-nav ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	display:flex;
+	gap:1rem;
+	align-items:center;
+}
+.site-nav a{ color:var(--accent); text-decoration:none; font-weight:600;}
+.order-btn{
+	background:var(--accent);
+	color:white !important;
+	padding:.6rem 1rem;
+	border-radius:999px;
+	margin-left:12px;
+	text-decoration:none;
+}
+
+/* hero */
+.hero{
+	height:520px;
+	background-size:cover;
+	background-position:center;
+	position:relative;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.hero-overlay{
+	width:100%;
+	max-width:1100px;
+	padding:3rem 1rem;
+	text-align:center;
+	background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.35));
+	border-radius:8px;
+	box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+.hero-headline{
+	font-family:"Playfair Display", serif;
+	font-size:3.2rem;
+	margin:0 0 0.6rem;
+	color:var(--accent);
+}
+.primary-btn{
+	display:inline-block;
+	background:var(--accent);
+	color:white;
+	padding:.8rem 1.6rem;
+	border-radius:30px;
+	text-decoration:none;
+	font-weight:700;
+}
+
+/* containers */
+.container{
+	max-width:var(--container);
+	margin:0 auto;
+	padding:3rem 1rem;
+}
+
+/* why */
+.why h2{ font-family:"Playfair Display", serif; font-size:2rem; margin-bottom:.5rem; }
+.lead{ color:var(--muted); max-width:800px; margin-bottom:2rem; }
+
+.cards{
+	display:flex;
+	gap:1.5rem;
+	justify-content:space-between;
+	flex-wrap:wrap;
+}
+.card{
+	background:#fff;
+	border-radius:10px;
+	flex:1;
+	min-width:260px;
+	padding:1rem;
+	box-shadow:0 8px 20px rgba(0,0,0,0.06);
+	text-align:center;
+}
+.card-image{ height:160px; background-size:cover; background-position:center; border-radius:8px; margin-bottom:1rem; }
+
+/* gallery */
+.gallery-grid{
+	display:grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap:12px;
+}
+.g-item{ background-size:cover; background-position:center; min-height:150px; border-radius:8px; }
+
+/* visit */
+.visit{ display:flex; gap:2rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.visit-text{ flex:1; min-width:320px; }
+.visit-info{ background:#fff; padding:1rem; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.04); min-width:260px; }
+
+/* bottom */
+.bottom-items{ display:flex; gap:1rem; flex-wrap:wrap; }
+.bottom-item{ background:#fff; padding:1rem; border-radius:8px; flex:1; min-width:240px; box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+
+/* contact */
+.contact-form{ max-width:600px; display:flex; flex-direction:column; gap:.75rem; }
+input, textarea{ padding:.6rem; border-radius:6px; border:1px solid #e1d4c8; font-size:1rem; }
+button.primary-btn{ border:none; cursor:pointer; }
+
+/* footer */
+.site-footer{ background:var(--primary); color:white; padding:1.5rem 1rem; margin-top:2rem;}
+.site-footer .inner{ max-width:var(--container); margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+
+/* small screens */
+@media (max-width:900px){
+	.hero-headline{ font-size:2.2rem }
+	.gallery-grid{ grid-template-columns: repeat(2, 1fr); }
+	.cards{ flex-direction:column; }
+	.visit{ flex-direction:column; }
+}
+
+/* animations */
+.fade-in{ opacity:0; transform: translateY(8px); animation:fadeIn 1s ease forwards; }
+@keyframes fadeIn{ to { opacity:1; transform:none } }
