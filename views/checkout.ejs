@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= data.company.name %> — Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<%- include('partials/header') %>
+
+<main>
+  <h2>Checkout</h2>
+  <div>
+    <label for="payment-method">Choose a card:</label>
+    <select name="payment-method" id="payment-method" style="margin-bottom: 20px">
+      <option value="pix">PIX</option>
+      <option value="debit-card">Debit</option>
+      <option value="visa-ok">VISA - Accept</option>
+      <option value="visa-not-ok">VISA - Decline</option>
+      <option value="master-card-ok">MasterCard - Accept</option>
+      <option value="master-card-not-ok">MasterCard - Decline</option>
+      <option value="amex-ok">Amex - Accept</option>
+      <option value="amex-not-ok">Amex - Decline</option>
+      <option value="elo-ok">Elo - Accept</option>
+      <option value="elo-not-ok">Elo - Decline</option>
+      <option value="hyper-ok">Hyper - Accept</option>
+      <option value="hyper-not-ok">Hyper - Decline</option>
+    </select>
+    <br/>
+    <a id="pay-btn" class="order-btn" href="javascript:void(0);"
+       onClick='
+        const paymentMethod = document.getElementById("payment-method").value
+
+        let endpoint = "/pagamentos/credito"
+        let data = { card: paymentMethod }
+
+        if (paymentMethod === "debit-card") {
+          endpoint = "/pagamentos/debito"
+
+          const card = {
+            number: "4111111111111111",
+            expirationMonth: "12",
+            expirationYear: "2030",
+            ccv: "123",
+            brand: "visa",
+            bank: "itau",
+          }
+
+          data = {
+            card: card
+          }
+        }
+
+        if (paymentMethod === "pix") {
+          endpoint = "/pagamentos/pix"
+          data = null
+        }
+
+        loadUrl(
+          endpoint,
+          "POST",
+          data,
+          null,
+          async (json) => {
+            const fallbackPage = "/paymentFallback"
+            let urlParam = "result=2"
+
+            if (json.referenceId !== undefined && json.referenceId !== null) {
+              urlParam = `ref=${json.referenceId}`
+              if (json.qrCode !== undefined && json.qrCode !== null) {
+                urlParam += `&qrCode=${json.qrCode}`
+                if (json.qrCodeExpirationDate !== undefined && json.qrCodeExpirationDate !== null) {
+                  urlParam += `&expirationDate=${json.qrCodeExpirationDate}`
+                }
+              }
+            }
+
+            logger.debug(`Redirecting to: ${fallbackPage}?${urlParam}`);
+
+            await delay(3000);
+            window.location.href = `${fallbackPage}?${urlParam}`;
+          }
+        )'>
+      PAY
+    </a>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
+<script type="application/javascript" src="/checkout.js"></script>
+
+</body>
+</html>

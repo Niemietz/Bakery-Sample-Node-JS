@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title><%= data.company.name %> — Orders</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<%- include('partials/header') %>
+
+<main>
+    <h3 id="qr_code_placeholder" style="display: none">[PIX_QR_CODE_IMAGE_PLACEHOLDER]</h3>
+    <p id="qr_code_expiration_label" style="display: none">This QR Code is valid until <span id="qr_code_expiration_date">??/??/????</span></p>
+    <h2>
+  <%
+    switch (result) {
+        case "0":
+  %>
+        Pagamento efetuado com sucesso ;)
+  <%
+            break
+        case "1":
+  %>
+        Pagamento anulado :(
+  <%
+            break
+        case "2":
+  %>
+        Erro ao efetuar o pagamento :(
+  <%
+            break
+        default:
+  %>
+        Aguardando confirmação do pagamento...
+  <%
+    }
+  %>
+  </h2>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/paymentFallback.js"></script>
+
+</body>
+</html>
